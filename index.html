@@ -70,7 +70,7 @@ function onStart(){
 function onStop(){
   sensor_acc.stop();
   sensor_rot.stop();
-	
+	btnStart.innerHTML="Wait...";
 	$.ajax({
     url: "https://general-calculation-test.herokuapp.com/api/v1/calc_web",
     dataType: "json",
@@ -121,9 +121,6 @@ sensor_rot.addEventListener("reading", function(e) {
   rot.innerHTML = "rot: " + e.target.x;
 });
 
-
-
-//# sourceURL=userscript.js
 </script>
 </body>
 </html>
