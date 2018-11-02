@@ -4,6 +4,10 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+	<script
+  src="https://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
 	
 <style id="webmakerstyle">
 button{
@@ -51,31 +55,35 @@ function onStart(){
 function onStop(){
   sensor_acc.stop();
   sensor_rot.stop();
-  axios.post('https://general-calculation-test.herokuapp.com/api/v1/calc_web', {
- 	arr_x: arr_x,arr_y: arr_y,arr_z: arr_z,arr_t: arr_t,
-	arr_xR: arr_x,arr_yR: arr_y,arr_zR: arr_z,arr_tR: arr_tR
-  }
-	    )
-  .then(function (response) {
-	  alert('got response' + response);
-	resp.innerHTML = response;
-  })
-  .catch(function (error) {
-	  debugger;
-    resp.innerHTML = error;
-  })
-  .then(function () {
-    // always executed
-	 arr_x = [];
-	 arr_y = [];
-	 arr_z = [];
-	 arr_t = [];
-	 arr_xR = [];
-	 arr_yR = [];
-	 arr_zR = [];
-	 arr_tR = [];
-  });  
-}
+	$.post( "https://general-calculation-test.herokuapp.com/api/v1/calc_web", { arr_x: arr_x,arr_y: arr_y,arr_z: arr_z,arr_t: arr_t,arr_xR: arr_x,arr_yR: arr_y,arr_zR: arr_z,arr_tR: arr_tR })
+  .done(function( data ) {
+    alert( "Data Loaded: " + data );
+  });
+//   axios.post('https://general-calculation-test.herokuapp.com/api/v1/calc_web', {
+//  	arr_x: arr_x,arr_y: arr_y,arr_z: arr_z,arr_t: arr_t,
+// 	arr_xR: arr_x,arr_yR: arr_y,arr_zR: arr_z,arr_tR: arr_tR
+//   }
+// 	    )
+//   .then(function (response) {
+// 	  alert('got response' + response);
+// 	resp.innerHTML = response;
+//   })
+//   .catch(function (error) {
+// 	  debugger;
+//     resp.innerHTML = error;
+//   })
+//   .then(function () {
+//     // always executed
+// 	 arr_x = [];
+// 	 arr_y = [];
+// 	 arr_z = [];
+// 	 arr_t = [];
+// 	 arr_xR = [];
+// 	 arr_yR = [];
+// 	 arr_zR = [];
+// 	 arr_tR = [];
+//   });  
+// }
 sensor_acc.addEventListener("reading", function(e) {
   arr_x.push(e.target.x);
   arr_y.push(e.target.y);
