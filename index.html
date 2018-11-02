@@ -16,10 +16,11 @@
 button{
   background:#f8686e;
   color: #fff;
-margin-top:20px;
-font-weight: bold;
-text-transform: uppercase;
-border: none;
+  margin-top:20px;
+  font-weight: bold;
+  text-transform: uppercase;
+  border: none;
+button:focus {outline:0;}
   font-size:20px;
   display:block;
   width:100%;
@@ -35,7 +36,7 @@ border: none;
 <div id="acc"></div>
   <div id="rot"></div>
 	<div id="resp"></div>
-  <button onclick="onStart()">
+  <button id="btnStart" onclick="onStart()">
     Start
   </button>
   <button onclick="onStop()">
@@ -56,6 +57,7 @@ let arr_tR = [];
 const acc = document.getElementById("acc");
 const rot = document.getElementById("rot");
 const resp = document.getElementById("resp");
+const btnStart = document.getElementById("btnStart");
 const sensor_acc = new Accelerometer({ frequency: 60 });
 const sensor_rot = new Gyroscope({ frequency: 60 });
 function onStart(){
@@ -76,7 +78,8 @@ function onStop(){
     headers: { "Content-type": "application/json"},
     success: function (data) {
 	    resp.innerHTML = data;
-         alert( "Got Result: " + data[0] );
+//          alert( "Got Result: " + data[0] );
+	    btnStart.innerHTML=""+Math.round(data[0]);
 	    	 arr_x = [];
 	 arr_y = [];
 	 arr_z = [];
@@ -99,34 +102,11 @@ function onStop(){
     },
     type: "POST"
 });
-//   axios.post('https://general-calculation-test.herokuapp.com/api/v1/calc_web', {
-//  	arr_x: arr_x,arr_y: arr_y,arr_z: arr_z,arr_t: arr_t,
-// 	arr_xR: arr_x,arr_yR: arr_y,arr_zR: arr_z,arr_tR: arr_tR
-//   }
-// 	    )
-//   .then(function (response) {
-// 	  alert('got response' + response);
-// 	resp.innerHTML = response;
-//   })
-//   .catch(function (error) {
-//     resp.innerHTML = error;
-//   })
-//   .then(function () {
-//     // always executed
-// 	 arr_x = [];
-// 	 arr_y = [];
-// 	 arr_z = [];
-// 	 arr_t = [];
-// 	 arr_xR = [];
-// 	 arr_yR = [];
-// 	 arr_zR = [];
-// 	 arr_tR = [];
-//   });  
 }
 sensor_acc.addEventListener("reading", function(e) {
-  arr_x.push(e.target.x/9.8);
-  arr_y.push(e.target.y/9.8);
-  arr_z.push(e.target.z/9.8);
+  arr_x.push(e.target.x/9.80665);
+  arr_y.push(e.target.y/9.80665);
+  arr_z.push(e.target.z/9.80665);
   arr_t.push(new Date().getTime()*1000000);
   acc.innerHTML = "acc: " + e.target.x;
 });
