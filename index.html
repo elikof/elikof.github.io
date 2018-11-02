@@ -31,14 +31,14 @@ button{
 </html>
 
 <script>
-const arr_x = [];
-const arr_y = [];
-const arr_z = [];
-const arr_t = [];
-const arr_xR = [];
-const arr_yR = [];
-const arr_zR = [];
-const arr_tR = [];
+let arr_x = [];
+let arr_y = [];
+let arr_z = [];
+let arr_t = [];
+let arr_xR = [];
+let arr_yR = [];
+let arr_zR = [];
+let arr_tR = [];
 const acc = document.getElementById("acc");
 const rot = document.getElementById("rot");
 const resp = document.getElementById("resp");
@@ -65,20 +65,29 @@ function onStop(){
   })
   .then(function () {
     // always executed
+	 resp.innerHTML ="";
+	 arr_x = [];
+	 arr_y = [];
+	 arr_z = [];
+	 arr_t = [];
+	 arr_xR = [];
+	 arr_yR = [];
+	 arr_zR = [];
+	 arr_tR = [];
   });  
 }
 sensor_acc.addEventListener("reading", function(e) {
   arr_x.push(e.target.x);
   arr_y.push(e.target.y);
   arr_z.push(e.target.z);
-  arr_t.push(new Date().getTime()*1000000);
+  arr_t.push(new Date().getTime()*1000);
   acc.innerHTML = "acc: " + e.target.x;
 });
 sensor_rot.addEventListener("reading", function(e) {
   arr_xR.push(e.target.x);
   arr_yR.push(e.target.y);
   arr_zR.push(e.target.z);
-  arr_tR.push(new Date().getTime()*1000000);
+  arr_tR.push(new Date().getTime()*1000);
   rot.innerHTML = "rot: " + e.target.x;
 });
 
