@@ -61,7 +61,8 @@ function onStop(){
 	resp.innerHTML = response;
   })
   .catch(function (error) {
-    resp.innerHTML = error.status;
+	  debugger;
+    resp.innerHTML = error;
   })
   .then(function () {
     // always executed
