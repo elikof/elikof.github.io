@@ -121,9 +121,9 @@ sensor_acc.addEventListener("reading", function(e) {
   acc.innerHTML = "acc: " + e.target.x;
 });
 sensor_rot.addEventListener("reading", function(e) {
-  arr_xR.push(e.target.x);
-  arr_yR.push(e.target.y);
-  arr_zR.push(e.target.z);
+  arr_xR.push(e.target.x*9.8);
+  arr_yR.push(e.target.y*9.8);
+  arr_zR.push(e.target.z*9.8);
   arr_tR.push(new Date().getTime()*1000000);
   rot.innerHTML = "rot: " + e.target.x;
 });
