@@ -55,10 +55,23 @@ function onStart(){
 function onStop(){
   sensor_acc.stop();
   sensor_rot.stop();
-	$.post( "https://general-calculation-test.herokuapp.com/api/v1/calc_web", { arr_x: arr_x,arr_y: arr_y,arr_z: arr_z,arr_t: arr_t,arr_xR: arr_x,arr_yR: arr_y,arr_zR: arr_z,arr_tR: arr_tR })
-  .done(function( data ) {
-    alert( "Data Loaded: " + data );
-  });
+	
+	$.ajax({
+    url: "https://general-calculation-test.herokuapp.com/api/v1/calc_web",
+    dataType: "json",
+    data: { arr_x: arr_x,arr_y: arr_y,arr_z: arr_z,arr_t: arr_t,arr_xR: arr_x,arr_yR: arr_y,arr_zR: arr_z,arr_tR: arr_tR },
+    async: true,
+    cache: false,
+    timeout: 30000,
+    headers: { "Content-type": "application/json"},
+    success: function (data) {
+         alert( "Data Loaded: " + data );
+    },
+    error: function (request, status, error) {
+         alert( "Error Loaded: " + error );
+    },
+    type: "POST"
+});
 //   axios.post('https://general-calculation-test.herokuapp.com/api/v1/calc_web', {
 //  	arr_x: arr_x,arr_y: arr_y,arr_z: arr_z,arr_t: arr_t,
 // 	arr_xR: arr_x,arr_yR: arr_y,arr_zR: arr_z,arr_tR: arr_tR
