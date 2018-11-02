@@ -61,11 +61,10 @@ function onStop(){
 	resp.innerHTML = response;
   })
   .catch(function (error) {
-    resp.innerHTML = error;
+    resp.innerHTML = error.status;
   })
   .then(function () {
     // always executed
-	 resp.innerHTML ="";
 	 arr_x = [];
 	 arr_y = [];
 	 arr_z = [];
