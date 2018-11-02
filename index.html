@@ -57,7 +57,8 @@ function onStop(){
   }
 	    )
   .then(function (response) {
-	  resp.innerHTML = response;
+	  alert('got response' + response);
+	resp.innerHTML = response;
   })
   .catch(function (error) {
     resp.innerHTML = error;
