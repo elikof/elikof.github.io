@@ -52,14 +52,8 @@ function onStop(){
   sensor_acc.stop();
   sensor_rot.stop();
   axios.post('https://general-calculation-test.herokuapp.com/api/v1/calc_web', {
-    params: {
  	arr_x: arr_x,arr_y: arr_y,arr_z: arr_z,arr_t: arr_t,
-	arr_xR: arr_x,arr_yR: arr_y,arr_zR: arr_z,arr_tR: arr_tR,
-    }
-	 // ,
-	 // headers: {
-    	//'Content-Type': 'application/x-www-form-urlencoded'
-  	//}
+	arr_xR: arr_x,arr_yR: arr_y,arr_zR: arr_z,arr_tR: arr_tR
   }
 	    )
   .then(function (response) {
