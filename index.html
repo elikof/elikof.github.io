@@ -3,7 +3,8 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1">
-
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+	
 <style id="webmakerstyle">
 button{
   display:block;
@@ -17,9 +18,9 @@ button{
 
 <html>
 <body>
-  This Is The Value:
-	<div id="acc"></div>
+<div id="acc"></div>
   <div id="rot"></div>
+	<div id="resp"></div>
   <button onclick="onStart()">
     Start
   </button>
@@ -40,6 +41,7 @@ const arr_zR = [];
 const arr_tR = [];
 const acc = document.getElementById("acc");
 const rot = document.getElementById("rot");
+const resp = document.getElementById("resp");
 const sensor_acc = new Accelerometer({ frequency: 60 });
 const sensor_rot = new Gyroscope({ frequency: 60 });
 function onStart(){
@@ -49,6 +51,21 @@ function onStart(){
 function onStop(){
   sensor_acc.stop();
   sensor_rot.stop();
+  axios.post('https://general-calculation-test.herokuapp.com/api/v1/calc_web', {
+    params: {
+ 	arr_x: arr_x,arr_y: arr_y,arr_z: arr_z,arr_t: arr_t,
+	arr_xR: arr_x,arr_yR: arr_y,arr_zR: arr_z,arr_tR: arr_tR,
+    }
+  })
+  .then(function (response) {
+	  resp.innerHTML = response;
+  })
+  .catch(function (error) {
+    resp.innerHTML = error;
+  })
+  .then(function () {
+    // always executed
+  });  
 }
 sensor_acc.addEventListener("reading", function(e) {
   arr_x.push(e.target.x);
