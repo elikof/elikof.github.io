@@ -65,10 +65,10 @@ function onStop(){
     timeout: 30000,
     headers: { "Content-type": "application/json"},
     success: function (data) {
-         alert( "Data Loaded: " + data );
+         alert( "Got Result: " + data[0] );
     },
     error: function (request, status, error) {
-         alert( "Error Loaded: " + error );
+         alert( "Server Error: " + status );
     },
     type: "POST"
 });
