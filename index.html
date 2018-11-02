@@ -59,7 +59,7 @@ const resp = document.getElementById("resp");
 const btnStart = document.getElementById("btnStart");
 const sensor_acc = new Accelerometer({ frequency: 60 });
 const sensor_rot = new Gyroscope({ frequency: 60 });
-let canStart=True;
+let canStart=true;
 function onButtonClick(){
 	if(canStart)
 		onStart();
