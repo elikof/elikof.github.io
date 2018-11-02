@@ -35,12 +35,13 @@ button{
 
 <html>
 <body>
+	<button id="btnStart" onclick="onButtonClick()">
+    Start
+  </button>
 <div id="acc"></div>
   <div id="rot"></div>
 	<div id="resp"></div>
-  <button id="btnStart" onclick="onButtonClick()">
-    Start
-  </button>
+  
 </body>
 </html>
 
@@ -70,7 +71,7 @@ function onStart(){
   sensor_acc.start();
   sensor_rot.start();
 	canStart=false;
-	btnStart.innerHTML="Move!";
+	btnStart.innerHTML="Stop";
 }
 function onStop(){
   sensor_acc.stop();
