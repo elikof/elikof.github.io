@@ -43,7 +43,6 @@ const rot = document.getElementById("rot");
 const sensor_acc = new Accelerometer({ frequency: 60 });
 const sensor_rot = new Gyroscope({ frequency: 60 });
 function onStart(){
-  alert("a");
   sensor_acc.start();
   sensor_rot.start();
 }
