@@ -54,14 +54,14 @@ sensor_acc.addEventListener("reading", function(e) {
   arr_x.push(e.target.x);
   arr_y.push(e.target.y);
   arr_z.push(e.target.z);
-  arr_t.push(e.target.t);
+  arr_t.push(new Date().getTime());
   acc.innerHTML = "acc: " + e.target.x;
 });
 sensor_rot.addEventListener("reading", function(e) {
   arr_xR.push(e.target.x);
   arr_yR.push(e.target.y);
   arr_zR.push(e.target.z);
-  arr_tR.push(e.target.t);
+  arr_tR.push(new Date().getTime());
   rot.innerHTML = "rot: " + e.target.x;
 });
 
