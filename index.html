@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8" />
+
+<style id="webmakerstyle">
+button{
+  display:block;
+  width:200px;
+  height:50px;
+  margin:10px;
+}
+</style>
+</head>
+<body>
+
+<html>
+<body>
+  This Is The Value:
+	<div id="acc"></div>
+  <div id="rot"></div>
+  <button onclick="onStart()">
+    Start
+  </button>
+  <button onclick="onStop()">
+    Stop
+  </button>
+</body>
+</html>
+
+<script>
+const arr_x = [];
+const arr_y = [];
+const arr_z = [];
+const arr_t = [];
+const arr_xR = [];
+const arr_yR = [];
+const arr_zR = [];
+const arr_tR = [];
+const acc = document.getElementById("acc");
+const rot = document.getElementById("rot");
+const sensor_acc = new Accelerometer({ frequency: 60 });
+const sensor_rot = new Gyroscope({ frequency: 60 });
+function onStart(){
+  alert("a");
+  sensor_acc.start();
+  sensor_rot.start();
+}
+function onStop(){
+  sensor_acc.stop();
+  sensor_rot.stop();
+}
+sensor_acc.addEventListener("reading", function(e) {
+  arr_x.push(e.target.x);
+  arr_y.push(e.target.y);
+  arr_z.push(e.target.z);
+  arr_t.push(e.target.t);
+  acc.innerHTML = "x: " + e.target.x;
+});
+sensor_rot.addEventListener("reading", function(e) {
+  arr_xR.push(e.target.x);
+  arr_yR.push(e.target.y);
+  arr_zR.push(e.target.z);
+  arr_tR.push(e.target.t);
+  container.innerHTML = "x: " + e.target.x;
+});
+
+
+
+//# sourceURL=userscript.js
+</script>
+</body>
+</html>
