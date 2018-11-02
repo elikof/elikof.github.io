@@ -23,7 +23,6 @@ button{
   font-weight: bold;
   text-transform: uppercase;
   border: none;
-button:focus {outline:0;}
   font-size:50px;
   display:block;
   width:100%;
@@ -39,11 +38,8 @@ button:focus {outline:0;}
 <div id="acc"></div>
   <div id="rot"></div>
 	<div id="resp"></div>
-  <button id="btnStart" onclick="onStart()">
+  <button id="btnStart" onclick="onButtonClick()">
     Start
-  </button>
-  <button onclick="onStop()">
-    Stop
   </button>
 </body>
 </html>
@@ -63,13 +59,23 @@ const resp = document.getElementById("resp");
 const btnStart = document.getElementById("btnStart");
 const sensor_acc = new Accelerometer({ frequency: 60 });
 const sensor_rot = new Gyroscope({ frequency: 60 });
+let canStart=True;
+function onButtonClick(){
+	if(canStart)
+		onStart();
+	else
+		onStop();
+}
 function onStart(){
   sensor_acc.start();
   sensor_rot.start();
+	canStart=false;
+	btnStart.innerHTML="Move!";
 }
 function onStop(){
   sensor_acc.stop();
   sensor_rot.stop();
+	canStart=true;
 	btnStart.innerHTML="Wait...";
 	$.ajax({
     url: "https://general-calculation-test.herokuapp.com/api/v1/calc_web",
