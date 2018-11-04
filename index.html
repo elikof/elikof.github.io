@@ -73,7 +73,13 @@
     onStop();
 }
 function onSaveClick(){
- window.open('mailto:test@example.com?subject=WebMySizeData&body='+JSON.stringify({ arr_x: arr_x,arr_y: arr_y,arr_z: arr_z,arr_t: arr_t,arr_xR: arr_x,arr_yR: arr_y,arr_zR: arr_z,arr_tR: arr_tR }));
+  const items = { arr_x: arr_x,arr_y: arr_y,arr_z: arr_z,arr_t: arr_t,arr_xR: arr_x,arr_yR: arr_y,arr_zR: arr_z,arr_tR: arr_tR };
+const replacer = (key, value) => value === null ? '' : value // specify how you want to handle null values here
+const header = Object.keys(items[0])
+let csv = items.map(row => header.map(fieldName => JSON.stringify(row[fieldName], replacer)).join(','))
+csv.unshift(header.join(','))
+csv = csv.join('\r\n')
+ window.open('mailto:test@example.com?subject=WebMySizeData&body='+csv);
 }
 function onStart(){
   arr_x = [];
