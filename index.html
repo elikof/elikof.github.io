@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/json2csv"></script>
   <script
   src="https://code.jquery.com/jquery-3.3.1.min.js"
   integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
@@ -73,12 +73,18 @@
     onStop();
 }
 function onSaveClick(){
-  const items = { arr_x: arr_x,arr_y: arr_y,arr_z: arr_z,arr_t: arr_t,arr_xR: arr_x,arr_yR: arr_y,arr_zR: arr_z,arr_tR: arr_tR };
-const replacer = (key, value) => value === null ? '' : value // specify how you want to handle null values here
-const header = Object.keys(items[0])
-let csv = items.map(row => header.map(fieldName => JSON.stringify(row[fieldName], replacer)).join(','))
-csv.unshift(header.join(','))
-csv = csv.join('\r\n')
+const Json2csvParser = require('json2csv').Parser;
+const fields = ['arr_x' ,'arr_y','arr_z','arr_z','arr_t','arr_xR','arr_yR','arr_zR','arr_tR'];
+const opts = { fields };
+
+try {
+  const parser = new Json2csvParser(opts);
+  const csv = parser.parse(myData);
+  console.log(csv);
+} catch (err) {
+  console.error(err);
+}
+
  window.open('mailto:test@example.com?subject=WebMySizeData&body='+csv);
 }
 function onStart(){
@@ -103,7 +109,7 @@ function onStop(){
   $.ajax({
     url: "https://general-calculation-test.herokuapp.com/api/v1/calc_web",
     dataType: "json",
-    data: JSON.stringify({ arr_x: arr_x,arr_y: arr_y,arr_z: arr_z,arr_t: arr_t,arr_xR: arr_x,arr_yR: arr_y,arr_zR: arr_z,arr_tR: arr_tR }),
+    data: JSON.stringify({ arr_x: arr_x,arr_y: arr_y,arr_z: arr_z,arr_t: arr_t,arr_xR: arr_xR,arr_yR: arr_yR,arr_zR: arr_zR,arr_tR: arr_tR }),
     async: true,
     cache: false,
     timeout: 30000,
