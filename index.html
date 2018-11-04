@@ -1,85 +1,100 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-	<script
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script
   src="https://code.jquery.com/jquery-3.3.1.min.js"
   integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
   crossorigin="anonymous"></script>
-	
-<style>
-	:focus {
+
+  <style>
+  :focus {
     outline: 0 !important;
-}
-	body{
-		background:white;
-	}
-button{
-  background:#f8686e;
-  color: #fff;
-  margin-top:100px;
-	margin-bottom:100px;
-  font-weight: bold;
-  text-transform: uppercase;
-  border: none;
-  font-size:50px;
-  display:block;
-  width:100%;
-  height:100px;
-  border-radius: 30px;
-}
+  }
+  body{
+    background:white;
+  }
+  button{
+    background:#f8686e;
+    color: #fff;
+    margin-top:100px;
+    margin-bottom:100px;
+    font-weight: bold;
+    text-transform: uppercase;
+    border: none;
+    font-size:50px;
+    display:block;
+    width:100%;
+    height:100px;
+    border-radius: 30px;
+  }
 </style>
 </head>
 <body>
 
-<html>
-<body>
-	<button id="btnStart" onclick="onButtonClick()">
+  <html>
+  <body>
+   <button id="btnStart" onclick="onButtonClick()">
     Start
   </button>
-<div id="acc"></div>
+
+  <button id="btnSave" onclick="onSaveClick()">
+    Save
+  </button>
+  <div id="acc"></div>
   <div id="rot"></div>
-	<div id="resp"></div>
+  <div id="resp"></div>
   
 </body>
 </html>
 
 <script>
-let arr_x = [];
-let arr_y = [];
-let arr_z = [];
-let arr_t = [];
-let arr_xR = [];
-let arr_yR = [];
-let arr_zR = [];
-let arr_tR = [];
-const acc = document.getElementById("acc");
-const rot = document.getElementById("rot");
-const resp = document.getElementById("resp");
-const btnStart = document.getElementById("btnStart");
-const sensor_acc = new Accelerometer({ frequency: 60 });
-const sensor_rot = new Gyroscope({ frequency: 60 });
-let canStart=true;
-function onButtonClick(){
-	if(canStart)
-		onStart();
-	else
-		onStop();
+  let arr_x = [];
+  let arr_y = [];
+  let arr_z = [];
+  let arr_t = [];
+  let arr_xR = [];
+  let arr_yR = [];
+  let arr_zR = [];
+  let arr_tR = [];
+  const acc = document.getElementById("acc");
+  const rot = document.getElementById("rot");
+  const resp = document.getElementById("resp");
+  const btnStart = document.getElementById("btnStart");
+  const sensor_acc = new Accelerometer({ frequency: 60 });
+  const sensor_rot = new Gyroscope({ frequency: 60 });
+  let canStart=true;
+  function onButtonClick(){
+   if(canStart)
+    onStart();
+  else
+    onStop();
+}
+function onSaveClick(){
+ window.open('mailto:test@example.com?subject=WebMySizeData&body='+JSON.stringify({ arr_x: arr_x,arr_y: arr_y,arr_z: arr_z,arr_t: arr_t,arr_xR: arr_x,arr_yR: arr_y,arr_zR: arr_z,arr_tR: arr_tR }));
 }
 function onStart(){
+  arr_x = [];
+  arr_y = [];
+  arr_z = [];
+  arr_t = [];
+  arr_xR = [];
+  arr_yR = [];
+  arr_zR = [];
+  arr_tR = [];
   sensor_acc.start();
   sensor_rot.start();
-	canStart=false;
-	btnStart.innerHTML="Stop";
+  canStart=false;
+  btnStart.innerHTML="Stop";
 }
 function onStop(){
   sensor_acc.stop();
   sensor_rot.stop();
-	canStart=true;
-	btnStart.innerHTML="Wait...";
-	$.ajax({
+  canStart=true;
+  btnStart.innerHTML="Wait...";
+  $.ajax({
     url: "https://general-calculation-test.herokuapp.com/api/v1/calc_web",
     dataType: "json",
     data: JSON.stringify({ arr_x: arr_x,arr_y: arr_y,arr_z: arr_z,arr_t: arr_t,arr_xR: arr_x,arr_yR: arr_y,arr_zR: arr_z,arr_tR: arr_tR }),
@@ -88,30 +103,14 @@ function onStop(){
     timeout: 30000,
     headers: { "Content-type": "application/json"},
     success: function (data) {
-	    resp.innerHTML = data;
+     resp.innerHTML = data;
 //          alert( "Got Result: " + data[0] );
-	    btnStart.innerHTML=""+Math.round(data[0]);
-	    	 arr_x = [];
-	 arr_y = [];
-	 arr_z = [];
-	 arr_t = [];
-	 arr_xR = [];
-	 arr_yR = [];
-	 arr_zR = [];
-	 arr_tR = [];
-    },
-    error: function (request, status, error) {
-         alert( "Server Error: " + status );
-	    	 arr_x = [];
-	 arr_y = [];
-	 arr_z = [];
-	 arr_t = [];
-	 arr_xR = [];
-	 arr_yR = [];
-	 arr_zR = [];
-	 arr_tR = [];
-    },
-    type: "POST"
+btnStart.innerHTML=""+Math.round(data[0]);
+},
+error: function (request, status, error) {
+ alert( "Server Error: " + status );
+},
+type: "POST"
 });
 }
 sensor_acc.addEventListener("reading", function(e) {
