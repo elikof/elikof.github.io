@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <script src="https://cdn.jsdelivr.net/npm/json2csv"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/4.6.1/papaparse.min.js"></script>
   <script
   src="https://code.jquery.com/jquery-3.3.1.min.js"
   integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
@@ -73,19 +73,9 @@
     onStop();
 }
 function onSaveClick(){
-const Json2csvParser = require('json2csv').Parser;
-const fields = ['arr_x' ,'arr_y','arr_z','arr_z','arr_t','arr_xR','arr_yR','arr_zR','arr_tR'];
-const opts = { fields };
+  const csv = Papa.unparse({ arr_x: arr_x,arr_y: arr_y,arr_z: arr_z,arr_t: arr_t,arr_xR: arr_xR,arr_yR: arr_yR,arr_zR: arr_zR,arr_tR: arr_tR });
 
-try {
-  const parser = new Json2csvParser(opts);
-  const csv = parser.parse(myData);
-  console.log(csv);
-} catch (err) {
-  console.error(err);
-}
-
- window.open('mailto:test@example.com?subject=WebMySizeData&body='+csv);
+  window.open('mailto:test@example.com?subject=WebMySizeData&body='+csv);
 }
 function onStart(){
   arr_x = [];
