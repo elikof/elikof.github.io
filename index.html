@@ -73,9 +73,9 @@
     onStop();
 }
 function onSaveClick(){
-  const csv = Papa.unparse({ arr_x,arr_y,arr_z,arr_t,arr_xR,arr_yR,arr_zR,arr_tR});
+  // const csv = Papa.unparse({ arr_x,arr_y,arr_z,arr_t,arr_xR,arr_yR,arr_zR,arr_tR});
 
-  window.open('mailto:test@example.com?subject=WebMySizeData&body='+csv);
+  window.open('mailto:elitu@mysizeid.com?subject=WebMySizeData&body='+JSON.stringify({ arr_x: arr_x,arr_y: arr_y,arr_z: arr_z,arr_t: arr_t,arr_xR: arr_xR,arr_yR: arr_yR,arr_zR: arr_zR,arr_tR: arr_tR }));
 }
 function onStart(){
   arr_x = [];
