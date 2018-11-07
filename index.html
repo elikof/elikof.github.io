@@ -67,7 +67,7 @@
   const sensor_rot = new Gyroscope({ frequency: 60 });
   let canStart=true;
   function onButtonClick(){
-    window.removeEventListener("devicemotion"); 
+
    if(canStart)
     onStart();
   else
@@ -134,14 +134,16 @@ sensor_rot.addEventListener("reading", function(e) {
 
 window.addEventListener("devicemotion", motion, false);
 function motion(event){
-  acc.innerHTML = "Accelerometer: "
-    + event.acceleration.x + ", "
-    + event.acceleration.y + ", "
-    + event.acceleration.z;
-  rot.innerHTML = "Rotation : "
-    + event.rotationRate.alpha + ", "
-    + event.rotationRate.beta + ", "
-    + event.rotationRate.gamma;
+  if (!canStart){
+    acc.innerHTML = "Accelerometer: "
+      + event.acceleration.x + ", "
+      + event.acceleration.y + ", "
+      + event.acceleration.z;
+    rot.innerHTML = "Rotation : "
+      + event.rotationRate.alpha + ", "
+      + event.rotationRate.beta + ", "
+      + event.rotationRate.gamma;
+  }
 }
 
 </script>
