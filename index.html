@@ -134,8 +134,7 @@ type: "POST"
 
 window.addEventListener("devicemotion", motion, false);
 function motion(event){
-  if (!canStart){
-    e=event;
+  if (!canStart){  
     acc.innerHTML = "Accelerometer: "
       + event.acceleration.x + ", "
       + event.acceleration.y + ", "
@@ -148,14 +147,14 @@ function motion(event){
       + event.interval;
 
 
-      arr_x.push(e.acceleration.x);
-      arr_y.push(e.acceleration.y);
-      arr_z.push(e.acceleration.z);
-      arr_t.push(e.interval*1000000);
-      arr_x.push(e.rotationRate.alpha);
-      arr_y.push(e.rotationRate.beta);
-      arr_z.push(e.rotationRate.gamma);
-      arr_t.push(e.interval*1000000);
+      arr_x.push(event.acceleration.x);
+      arr_y.push(event.acceleration.y);
+      arr_z.push(event.acceleration.z);
+      arr_t.push(event.interval*1000000);
+      arr_x.push(event.rotationRate.alpha);
+      arr_y.push(event.rotationRate.beta);
+      arr_z.push(event.rotationRate.gamma);
+      arr_t.push(event.interval*1000000);
   }
 }
 
