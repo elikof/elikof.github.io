@@ -87,14 +87,14 @@ function onStart(){
   arr_yR = [];
   arr_zR = [];
   arr_tR = [];
-  // sensor_acc.start();
-  // sensor_rot.start();
+  sensor_acc.start();
+  sensor_rot.start();
   canStart=false;
   btnStart.innerHTML="Stop";
 }
 function onStop(){
-  // sensor_acc.stop();
-  // sensor_rot.stop();
+  sensor_acc.stop();
+  sensor_rot.stop();
   canStart=true;
   btnStart.innerHTML="Wait...";
   $.ajax({
@@ -116,47 +116,47 @@ error: function (request, status, error) {
 type: "POST"
 });
 }
-// sensor_acc.addEventListener("reading", function(e) {
-//   arr_x.push(e.target.x/9.80665);
-//   arr_y.push(e.target.y/9.80665);
-//   arr_z.push(e.target.z/9.80665);
-//   arr_t.push(e.target.timestamp*1000000);
-//   // acc.innerHTML = "acc: " + e.target.x;
-// });
-// sensor_rot.addEventListener("reading", function(e) {
-//   arr_xR.push(e.target.x);
-//   arr_yR.push(e.target.y);
-//   arr_zR.push(e.target.z);
-//   arr_tR.push(e.target.timestamp*1000000);
-//   // rot.innerHTML = "rot: " + e.target.x;
-// });
+sensor_acc.addEventListener("reading", function(e) {
+  arr_x.push(e.target.x/9.80665);
+  arr_y.push(e.target.y/9.80665);
+  arr_z.push(e.target.z/9.80665);
+  arr_t.push(e.target.timestamp*1000000);
+  // acc.innerHTML = "acc: " + e.target.x;
+});
+sensor_rot.addEventListener("reading", function(e) {
+  arr_xR.push(e.target.x);
+  arr_yR.push(e.target.y);
+  arr_zR.push(e.target.z);
+  arr_tR.push(e.target.timestamp*1000000);
+  // rot.innerHTML = "rot: " + e.target.x;
+});
 
 
-window.addEventListener("devicemotion", motion, false);
-function motion(event){
-  if (!canStart){  
-    acc.innerHTML = "Accelerometer: "
-      + event.acceleration.x + ", "
-      + event.acceleration.y + ", "
-      + event.acceleration.z+ ", "
-      + event.interval;
-    rot.innerHTML = "Rotation : "
-      + event.rotationRate.alpha + ", "
-      + event.rotationRate.beta + ", "
-      + event.rotationRate.gamma+ ", "
-      + event.interval;
+// window.addEventListener("devicemotion", motion, false);
+// function motion(event){
+//   if (!canStart){  
+//     acc.innerHTML = "Accelerometer: "
+//       + event.acceleration.x + ", "
+//       + event.acceleration.y + ", "
+//       + event.acceleration.z+ ", "
+//       + event.interval;
+//     rot.innerHTML = "Rotation : "
+//       + event.rotationRate.alpha + ", "
+//       + event.rotationRate.beta + ", "
+//       + event.rotationRate.gamma+ ", "
+//       + event.interval;
 
 
-      arr_x.push(event.acceleration.x);
-      arr_y.push(event.acceleration.y);
-      arr_z.push(event.acceleration.z);
-      arr_t.push(event.interval*1000000);
-      arr_x.push(event.rotationRate.alpha);
-      arr_y.push(event.rotationRate.beta);
-      arr_z.push(event.rotationRate.gamma);
-      arr_t.push(event.interval*1000000);
-  }
-}
+//       arr_x.push(event.acceleration.x);
+//       arr_y.push(event.acceleration.y);
+//       arr_z.push(event.acceleration.z);
+//       arr_t.push(event.interval*1000000);
+//       arr_x.push(event.rotationRate.alpha);
+//       arr_y.push(event.rotationRate.beta);
+//       arr_z.push(event.rotationRate.gamma);
+//       arr_t.push(event.interval*1000000);
+//   }
+// }
 
 </script>
 </body>
