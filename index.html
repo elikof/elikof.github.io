@@ -139,12 +139,12 @@ function motion(event){
       + event.acceleration.x + ", "
       + event.acceleration.y + ", "
       + event.acceleration.z+ ", "
-      + event.acceleration.interval;
+      + event.acceleration.timestamp;
     rot.innerHTML = "Rotation : "
       + event.rotationRate.alpha + ", "
       + event.rotationRate.beta + ", "
       + event.rotationRate.gamma+ ", "
-      + event.rotationRate.interval;
+      + event.rotationRate.timestamp;
 
 
       arr_x.push(e.acceleration.x/9.80665);
@@ -154,7 +154,7 @@ function motion(event){
       arr_x.push(e.rotationRate.alpha);
       arr_y.push(e.rotationRate.beta);
       arr_z.push(e.rotationRate.gamma);
-      arr_t.push(e.rotationRate.interval);
+      arr_t.push(e.rotationRate.timestamp*1000000);
   }
 }
 
