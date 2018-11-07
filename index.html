@@ -67,6 +67,7 @@
   const sensor_rot = new Gyroscope({ frequency: 60 });
   let canStart=true;
   function onButtonClick(){
+    window.removeEventListener("devicemotion"); 
    if(canStart)
     onStart();
   else
