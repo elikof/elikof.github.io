@@ -147,9 +147,9 @@ function motion(event){
       + event.interval;
 
 
-      arr_x.push(e.acceleration.x/9.80665);
-      arr_y.push(e.acceleration.y/9.80665);
-      arr_z.push(e.acceleration.z/9.80665);
+      arr_x.push(e.acceleration.x);
+      arr_y.push(e.acceleration.y);
+      arr_z.push(e.acceleration.z);
       arr_t.push(e.interval*1000000);
       arr_x.push(e.rotationRate.alpha);
       arr_y.push(e.rotationRate.beta);
