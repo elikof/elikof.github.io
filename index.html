@@ -120,15 +120,28 @@ sensor_acc.addEventListener("reading", function(e) {
   arr_y.push(e.target.y/9.80665);
   arr_z.push(e.target.z/9.80665);
   arr_t.push(e.target.timestamp*1000000);
-  acc.innerHTML = "acc: " + e.target.x;
+  // acc.innerHTML = "acc: " + e.target.x;
 });
 sensor_rot.addEventListener("reading", function(e) {
   arr_xR.push(e.target.x);
   arr_yR.push(e.target.y);
   arr_zR.push(e.target.z);
   arr_tR.push(e.target.timestamp*1000000);
-  rot.innerHTML = "rot: " + e.target.x;
+  // rot.innerHTML = "rot: " + e.target.x;
 });
+
+
+window.addEventListener("devicemotion", motion, false);
+function motion(event){
+  acc.innerHTML = "Accelerometer: "
+    + event.acceleration.x + ", "
+    + event.acceleration.y + ", "
+    + event.acceleration.z;
+  rot.innerHTML = "Rotation : "
+    + event.rotationRate.x + ", "
+    + event.rotationRate.y + ", "
+    + event.rotationRate.z;
+}
 
 </script>
 </body>
