@@ -135,6 +135,7 @@ type: "POST"
 window.addEventListener("devicemotion", motion, false);
 function motion(event){
   if (!canStart){
+    e=event
     acc.innerHTML = "Accelerometer: "
       + event.acceleration.x + ", "
       + event.acceleration.y + ", "
