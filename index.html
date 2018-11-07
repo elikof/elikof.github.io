@@ -127,7 +127,7 @@ sensor_rot.addEventListener("reading", function(e) {
   arr_yR.push(e.target.y);
   arr_zR.push(e.target.z);
   arr_tR.push(new Date().getTime()*1000000);
-  rot.innerHTML = "rot: " +sensor_acc.timestamp;//+ e.target.x;
+  rot.innerHTML = "rot: " +e.target.timestamp + " " + +e.timestamp;; //sensor_acc.timestamp;//+ e.target.x;
 });
 
 </script>
