@@ -87,14 +87,14 @@ function onStart(){
   arr_yR = [];
   arr_zR = [];
   arr_tR = [];
-  sensor_acc.start();
-  sensor_rot.start();
+  // sensor_acc.start();
+  // sensor_rot.start();
   canStart=false;
   btnStart.innerHTML="Stop";
 }
 function onStop(){
-  sensor_acc.stop();
-  sensor_rot.stop();
+  // sensor_acc.stop();
+  // sensor_rot.stop();
   canStart=true;
   btnStart.innerHTML="Wait...";
   $.ajax({
@@ -116,20 +116,20 @@ error: function (request, status, error) {
 type: "POST"
 });
 }
-sensor_acc.addEventListener("reading", function(e) {
-  arr_x.push(e.target.x/9.80665);
-  arr_y.push(e.target.y/9.80665);
-  arr_z.push(e.target.z/9.80665);
-  arr_t.push(e.target.timestamp*1000000);
-  // acc.innerHTML = "acc: " + e.target.x;
-});
-sensor_rot.addEventListener("reading", function(e) {
-  arr_xR.push(e.target.x);
-  arr_yR.push(e.target.y);
-  arr_zR.push(e.target.z);
-  arr_tR.push(e.target.timestamp*1000000);
-  // rot.innerHTML = "rot: " + e.target.x;
-});
+// sensor_acc.addEventListener("reading", function(e) {
+//   arr_x.push(e.target.x/9.80665);
+//   arr_y.push(e.target.y/9.80665);
+//   arr_z.push(e.target.z/9.80665);
+//   arr_t.push(e.target.timestamp*1000000);
+//   // acc.innerHTML = "acc: " + e.target.x;
+// });
+// sensor_rot.addEventListener("reading", function(e) {
+//   arr_xR.push(e.target.x);
+//   arr_yR.push(e.target.y);
+//   arr_zR.push(e.target.z);
+//   arr_tR.push(e.target.timestamp*1000000);
+//   // rot.innerHTML = "rot: " + e.target.x;
+// });
 
 
 window.addEventListener("devicemotion", motion, false);
@@ -138,11 +138,23 @@ function motion(event){
     acc.innerHTML = "Accelerometer: "
       + event.acceleration.x + ", "
       + event.acceleration.y + ", "
-      + event.acceleration.z;
+      + event.acceleration.z+ ", "
+      + event.acceleration.interval;
     rot.innerHTML = "Rotation : "
       + event.rotationRate.alpha + ", "
       + event.rotationRate.beta + ", "
-      + event.rotationRate.gamma;
+      + event.rotationRate.gamma+ ", "
+      + event.rotationRate.interval;
+
+
+      arr_x.push(e.acceleration.x/9.80665);
+      arr_y.push(e.acceleration.y/9.80665);
+      arr_z.push(e.acceleration.z/9.80665);
+      arr_t.push(e.acceleration.interval*1000000);
+      arr_x.push(e.rotationRate.alpha);
+      arr_y.push(e.rotationRate.beta);
+      arr_z.push(e.rotationRate.gamma);
+      arr_t.push(e.rotationRate.interval);
   }
 }
 
