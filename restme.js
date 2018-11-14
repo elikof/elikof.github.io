@@ -24,6 +24,7 @@ function addRestAccReading(x, y, z){
 	rest_arr_x.push(x);
 	rest_arr_y.push(y);
 	rest_arr_z.push(z);
+    console.log("acc: " +accCount);    
     if (accCount > 30 && rotCount > 30) {
         accCount = 0;
         rotCount = 0;
@@ -38,6 +39,7 @@ function addRestAccReading(x, y, z){
     }
 }
 function addRestRotReading(x, y, z){
+    console.log("rot: " +rotCount);
 	rest_arr_xR.push(x);
 	rest_arr_yR.push(y);
 	rest_arr_zR.push(z);
