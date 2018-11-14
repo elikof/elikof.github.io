@@ -34,7 +34,7 @@ function addRestAccReading(x, y, z){
         rest_arr_xR = [];
         rest_arr_yR = [];
         rest_arr_zR = [];    
-        restMeasurd(rest_arr_x, rest_arr_y, rest_arr_z, rest_x_rot, rest_y_rot, rest_z_rot, restMeasurdData.thr_diff, restMeasurdData.thr_std, restMeasurdData.iter, restMeasurdData.t_acc, restMeasurdData.rest_status, restMeasurdData.rest_count);       
+        restMeasurd(rest_arr_x, rest_arr_y, rest_arr_z, rest_arr_xR, rest_arr_yR, rest_arr_zR, restMeasurdData.thr_diff, restMeasurdData.thr_std, restMeasurdData.iter, restMeasurdData.t_acc, restMeasurdData.rest_status, restMeasurdData.rest_count);       
         document.getElementById("btnStart").innerHTML=""+restMeasurdData.rest_status;
     }
 }
