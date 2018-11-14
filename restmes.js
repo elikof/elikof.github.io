@@ -40,6 +40,7 @@ function addRestAccReading(x, y, z){
 }
 function addRestRotReading(x, y, z){
     console.log("rot: " +rotCount);
+    rotCount++;
 	rest_arr_xR.push(x);
 	rest_arr_yR.push(y);
 	rest_arr_zR.push(z);
