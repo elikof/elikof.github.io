@@ -8,12 +8,12 @@ const restMeasurdData = {
     version: '2'
 }
 
-let arr_x = [];
-let arr_y = [];
-let arr_z = [];
-let arr_xR = [];
-let arr_yR = [];
-let arr_zR = [];
+let rest_arr_x = [];
+let rest_arr_y = [];
+let rest_arr_z = [];
+let rest_arr_xR = [];
+let rest_arr_yR = [];
+let rest_arr_zR = [];
 const sensor_acc = new Accelerometer({frequency: 60});
 const sensor_rot = new Gyroscope({frequency: 60});
 sensor_acc.start();
@@ -25,28 +25,28 @@ let rotCount = 0;
 
 function addRestAccReading(x, y, z){
 	accCount++;
-	arr_x.push(x);
-	arr_y.push(y);
-	arr_z.push(z);
+	rest_arr_x.push(x);
+	rest_arr_y.push(y);
+	rest_arr_z.push(z);
     if (accCount > 30 && rotCount > 30) {
         accCount = 0;
         rotCount = 0;
-        arr_x = [];
-        arr_y = [];
-        arr_z = [];
+        rest_arr_x = [];
+        rest_arr_y = [];
+        rest_arr_z = [];
         arr_t = [];
-        arr_xR = [];
-        arr_yR = [];
-        arr_zR = [];
+        rest_arr_xR = [];
+        rest_arr_yR = [];
+        rest_arr_zR = [];
         arr_tR = [];
-        restMeasurd(arr_x, arr_y, arr_z, x_rot, y_rot, z_rot, restMeasurdData.thr_diff, restMeasurdData.thr_std, restMeasurdData.iter, restMeasurdData.t_acc, restMeasurdData.rest_status, restMeasurdData.rest_count);       
+        restMeasurd(rest_arr_x, rest_arr_y, rest_arr_z, x_rot, y_rot, z_rot, restMeasurdData.thr_diff, restMeasurdData.thr_std, restMeasurdData.iter, restMeasurdData.t_acc, restMeasurdData.rest_status, restMeasurdData.rest_count);       
         document.getElementById("btnStart").innerHTML=""+restMeasurdData.rest_status;
     }
 }
 function addRestRotReading(x, y, z){
-	arr_xR.push(x);
-	arr_yR.push(y);
-	arr_zR.push(z);
+	rest_arr_xR.push(x);
+	rest_arr_yR.push(y);
+	rest_arr_zR.push(z);
 }
 
 function restMeasurd(x_acc, y_acc, z_acc, x_rot, y_rot, z_rot, thr_diff, thr_std, iter, t_acc, begin_move_triger, rest_status, rest_count) {
