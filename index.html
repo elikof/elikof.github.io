@@ -1,9 +1,10 @@
+
 <!DOCTYPE html>
 <html>
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/4.6.1/papaparse.min.js"></script>
+  <script src="rest_measurd.js"></script>
   <script
   src="https://code.jquery.com/jquery-3.3.1.min.js"
   integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
@@ -73,9 +74,9 @@
   else
     onStop();
 }
-function onSaveClick(){
-  // const csv = Papa.unparse({ arr_x,arr_y,arr_z,arr_t,arr_xR,arr_yR,arr_zR,arr_tR});
 
+
+function onSaveClick(){
   window.open('mailto:orit.naveh@mysizeid.com?subject=WebMySizeData&body='+JSON.stringify({ arr_x: arr_x,arr_y: arr_y,arr_z: arr_z,arr_t: arr_t,arr_xR: arr_xR,arr_yR: arr_yR,arr_zR: arr_zR,arr_tR: arr_tR }));
 }
 function onStart(){
@@ -106,57 +107,29 @@ function onStop(){
     timeout: 30000,
     headers: { "Content-type": "application/json"},
     success: function (data) {
-     resp.innerHTML = data;
-//          alert( "Got Result: " + data[0] );
-btnStart.innerHTML=""+Math.round(data[0]);
-},
-error: function (request, status, error) {
- alert( "Server Error: " + status );
-},
-type: "POST"
-});
+      resp.innerHTML = data;
+      btnStart.innerHTML=""+Math.round(data[0]);
+    },
+    error: function (request, status, error) {
+     alert( "Server Error: " + status );
+   },
+   type: "POST"
+ });
 }
 sensor_acc.addEventListener("reading", function(e) {
   arr_x.push(e.target.x/9.80665);
   arr_y.push(e.target.y/9.80665);
   arr_z.push(e.target.z/9.80665);
   arr_t.push(e.target.timestamp*1000000);
-  // acc.innerHTML = "acc: " + e.target.x;
+  addRestAccReading(e.target.x/9.80665,e.target.y/9.80665,e.target.z/9.80665);
 });
 sensor_rot.addEventListener("reading", function(e) {
   arr_xR.push(e.target.x);
   arr_yR.push(e.target.y);
   arr_zR.push(e.target.z);
   arr_tR.push(e.target.timestamp*1000000);
-  // rot.innerHTML = "rot: " + e.target.x;
+  addResRotReading(e.target.x,e.target.y,e.target.z);
 });
-
-
-// window.addEventListener("devicemotion", motion, false);
-// function motion(event){
-//   if (!canStart){  
-//     acc.innerHTML = "Accelerometer: "
-//       + event.acceleration.x + ", "
-//       + event.acceleration.y + ", "
-//       + event.acceleration.z+ ", "
-//       + event.interval;
-//     rot.innerHTML = "Rotation : "
-//       + event.rotationRate.alpha + ", "
-//       + event.rotationRate.beta + ", "
-//       + event.rotationRate.gamma+ ", "
-//       + event.interval;
-
-
-//       arr_x.push(event.acceleration.x);
-//       arr_y.push(event.acceleration.y);
-//       arr_z.push(event.acceleration.z);
-//       arr_t.push(event.interval*1000000);
-//       arr_x.push(event.rotationRate.alpha);
-//       arr_y.push(event.rotationRate.beta);
-//       arr_z.push(event.rotationRate.gamma);
-//       arr_t.push(event.interval*1000000);
-//   }
-// }
 
 </script>
 </body>
