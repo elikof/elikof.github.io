@@ -14,10 +14,6 @@ let rest_arr_z = [];
 let rest_arr_xR = [];
 let rest_arr_yR = [];
 let rest_arr_zR = [];
-const sensor_acc = new Accelerometer({frequency: 60});
-const sensor_rot = new Gyroscope({frequency: 60});
-sensor_acc.start();
-sensor_rot.start();
 
 let accCount = 0;
 let rotCount = 0;
@@ -33,12 +29,10 @@ function addRestAccReading(x, y, z){
         rotCount = 0;
         rest_arr_x = [];
         rest_arr_y = [];
-        rest_arr_z = [];
-        arr_t = [];
+        rest_arr_z = [];    
         rest_arr_xR = [];
         rest_arr_yR = [];
-        rest_arr_zR = [];
-        arr_tR = [];
+        rest_arr_zR = [];    
         restMeasurd(rest_arr_x, rest_arr_y, rest_arr_z, x_rot, y_rot, z_rot, restMeasurdData.thr_diff, restMeasurdData.thr_std, restMeasurdData.iter, restMeasurdData.t_acc, restMeasurdData.rest_status, restMeasurdData.rest_count);       
         document.getElementById("btnStart").innerHTML=""+restMeasurdData.rest_status;
     }
